@@ -80,20 +80,23 @@ class ProductController extends Controller
         $product->user_id = auth()->user()->id;
         return $product;
     }
-    public function filter(Request $request)
+    public function filterPrice(Request $request)
     {  $sign=$request->sign;
-        
-        if($sign=="g"){
-            $sign='>' ;
-        }elseif($sign=="l"){
-            $sign='<' ; 
-        }else{
-            $sign='=' ;
-        }
         $price=$request->pp;
         $id = auth()->user()->id; //اقرا ايش بيرجع الاوث ايضا 
-        $minimumPrice = DB::table('products')->where('price',$sign,$price)
+        $Price = DB::table('products')->where('price',$sign,$price)
         ->where('user_id', '=', $id)->get();
-            return view('products.index', ["products" => $minimumPrice]);
+        return view('products.index', ["products" => $Price]);
+    }
+    public function filterDate(Request $request){
+        $request->validate([
+            'date2'=>'before_or_equal:date1'
+        ]);
+        $date1=$request->date1;
+        $date2=$request->date2;
+        $id = auth()->user()->id;
+        $Date = DB::table('products')->where('created_at','>=',$date1)->where('created_at','<=',$date2)
+        ->where('user_id', '=', $id)->get();
+        return view('products.index', ["products" => $Date]);
     }
 }

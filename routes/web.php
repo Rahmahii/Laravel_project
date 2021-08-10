@@ -35,7 +35,8 @@ Route::get('editProduct/{id}', ['as' => 'editProduct', function () {
     return view('products.edit,');
 }]);
 Route::get('/products', [ProductController::class, 'index']);
-Route::post('/filter', [ProductController::class, 'filter']);
+Route::post('/filterPrice', [ProductController::class, 'filterPrice']);
+Route::post('/filterDate', [ProductController::class, 'filterDate']);
 Route::post('/products', [ProductController::class, 'store']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/productsEdit/{id}', [ProductController::class, 'Getupdate']);
