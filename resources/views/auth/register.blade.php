@@ -11,16 +11,11 @@
                         <div class="form-group row">
                             <label for="package_id" class="col-md-4 col-form-label text-md-right">{{ __('package') }}</label>
                             <div class="col-md-6">
-                                <input id="package_id" type="number" name="package_id" value="" class="form-control{{ $errors->has('package_id') ? ' is-invalid' : '' }}" required>
-                                <input id="pp" type="text">
+                                <input id="package_id" type="hidden" name="package_id" value="" class="form-control{{ $errors->has('package_id') ? ' is-invalid' : '' }}" required>
+                                <input id="package_name" type="text" readonly><br><small>You have chosen <strong id="pp"></strong> package</small>
 
                             </div>
                         </div>
-                        <script>
-                            document.getElementById("package_id").value = sessionStorage.getItem("ddvalue");
-                            document.getElementById("pp").value = sessionStorage.getItem("ddvalue2");
-                            // document.getElementById("ff").innerHTML = localStorage.getItem("Rahmah");
-                        </script>
                         <!-- Name -->
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -97,4 +92,9 @@
     </div>
 </div>
 
+                        <script>
+                            document.getElementById("package_id").value = sessionStorage.getItem("ddvalue");
+                            document.getElementById("package_name").value = sessionStorage.getItem("ddvalue2");
+                            document.getElementById("pp").innerHTML = sessionStorage.getItem("ddvalue2");
+                        </script>
 @endsection

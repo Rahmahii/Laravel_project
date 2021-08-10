@@ -25,18 +25,6 @@
         </div>
 
 
-        <script>
-            function passval() {
-                var e = document.getElementById("mytext");
-                var selecttext = e.value;
-                var selecttext2 = e.options[e.selectedIndex].text;
-
-                sessionStorage.setItem("ddvalue", selecttext);
-                localStorage.setItem("ddvalue2", selecttext2);
-
-                return true;
-            }
-        </script>
         <form method="post " action="{{ route( 'register') }} " id="package ">
             @csrf
             <label for="cars ">Choose a package:</label>
@@ -55,6 +43,18 @@
         @endauth @endif
     </div>
     </div>
+        <script>
+            function passval() {
+                var e = document.getElementById("mytext");
+                var selecttext = e.value;
+                var selecttext2 = e.options[e.selectedIndex].text;
+
+                sessionStorage.setItem("ddvalue", selecttext);
+                sessionStorage.setItem("ddvalue2", selecttext2);
+
+                return true;
+            }
+        </script>
 </body>
 
 </html>

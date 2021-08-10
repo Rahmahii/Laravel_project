@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
-use Validator;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
@@ -22,7 +23,9 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = auth()->user()->products()->find($id);
+        //$product = auth()->user()->products()->find($id);
+        $product = new ProductResource(Product::with('Distance','Mass','Category','Currency')->find($id));
+
         return view('products.show', ["product" => $product]);
     }
     public function store(ProductRequest $request)
@@ -72,7 +75,25 @@ class ProductController extends Controller
         $product->SKU = $request->SKU;
         $product->mass_id=$request->mass_id;
         $product->distance_id=$request->distance_id;
+        $product->category_id=$request->category_id;
+        $product->currency_id=$request->currency_id;
         $product->user_id = auth()->user()->id;
         return $product;
+    }
+    public function filter(Request $request)
+    {  $sign=$request->sign;
+        
+        if($sign=="g"){
+            $sign='>' ;
+        }elseif($sign=="l"){
+            $sign='<' ; 
+        }else{
+            $sign='=' ;
+        }
+        $price=$request->pp;
+        $id = auth()->user()->id; //اقرا ايش بيرجع الاوث ايضا 
+        $minimumPrice = DB::table('products')->where('price',$sign,$price)
+        ->where('user_id', '=', $id)->get();
+            return view('products.index', ["products" => $minimumPrice]);
     }
 }

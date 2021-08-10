@@ -29,8 +29,21 @@ class Product extends Model
             {
                 return $this->belongsTo(User::class);
             }
+            public function Distance()
+            { 
+                return $this->belongsTo(Distance::class);
+            }
+            public function Mass()
+            { 
+                return $this->belongsTo(Mass::class);
+            }
             public function Category()
             { 
                 return $this->belongsTo(Category::class);
             }
+            public function Currency()
+            { 
+                return $this->belongsTo(Currency::class);
+            }
+          
 }

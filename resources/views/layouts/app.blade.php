@@ -11,6 +11,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -47,7 +48,7 @@
                             </li>
                             @endif
                             <!-- Authentication Links -->
-                            @guest @if(Route::current()->getName() ==
+                         @if(Route::current()->getName() ==
                             'register')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">Login</a>
@@ -60,7 +61,7 @@
                         
                             @endif                 
 
-                            @endguest
+                           
                         </ul>
                     </div>
                 </div>

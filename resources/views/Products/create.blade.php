@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
+<!-- <script>
+function RR(){
+var d=document.getElementById("distance_id");
+var displaytext=d.options[d.selectedIndex].text;
+localStorage.setItem("ss",JSON.stringify(displaytext));
+return false;
+}
+</script> -->
 <div class="row">
             <div class="col-md-9 offset-md-2">
                         <h3>Add new product</h3>
@@ -14,6 +21,14 @@
                                                 <label for="name">name</label>
                                                 <input type="text" name="name" id="name" class="form-control" required>
                                     </div>
+                                    <label for="category_id">Choose a category :</label>
+                                    <br>
+
+                                    <select id="category_id" name="category_id" form="StoreProduct" class="form-select " >
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
 
                                     <div class="form-group">
                                                 <label for="description">description</label>
@@ -51,16 +66,23 @@
                                     </div>
                                     <label for="mass_id ">Choose an Unit Measure mass:</label>
                                     <br>
+
                                     <select id="mass_id" name="mass_id" form="StoreProduct" class="form-select " >
                                             @foreach($masses as $mass)
                                                 <option value="{{ $mass->id }}"> {{ $mass->name }}</option>
                                             @endforeach
                                         </select>
+
                                     <div class="form-group">
                                                 <label for="price">price</label>
                                                 <input type="number" name="price" id="price" class="form-control"
                                                             required>
                                     </div>
+                                    <select id="currency_id" name="currency_id" form="StoreProduct" class="form-select " >
+                                        @foreach($currencies as $currency)
+                                            <option value="{{ $currency->id }}"> {{ $currency->name }}</option>
+                                        @endforeach
+                                    </select>
                                     <div class="form-group">
                                                 <label for="quantity">quantity</label>
                                                 <input type="number" name="quantity" id="quantity" class="form-control"
@@ -89,7 +111,7 @@
                                     </div>
                                     @endif
                                     <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Create</button>
+                                                <button type="submit" class="btn btn-primary "onclick="RR();">Create</button>
                                     </div>
                         </form>
 
