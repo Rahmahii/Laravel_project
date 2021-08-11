@@ -8,6 +8,7 @@
                 <a href="{{ '/products'}}"
                     class="btn btn-danger">
                     All my Products</a>
+                    
             </div>
         </div>
     </div>

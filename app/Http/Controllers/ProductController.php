@@ -10,15 +10,13 @@ use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     public function categories(){
+    return DB::table('categories')->get();
+}
     public function index()
     {
         $products = auth()->user()->products;
-        return view('products.index', ["products" => $products]);
+        return view('products.index', ["products" => $products,"categories"=>$this->categories()]);
     }
 
     public function show($id)
@@ -81,22 +79,27 @@ class ProductController extends Controller
         return $product;
     }
     public function filterPrice(Request $request)
-    {  $sign=$request->sign;
+    {  
+        $sign=$request->sign;
         $price=$request->pp;
-        $id = auth()->user()->id; //اقرا ايش بيرجع الاوث ايضا 
+        $id = auth()->user()->id;  
         $Price = DB::table('products')->where('price',$sign,$price)
         ->where('user_id', '=', $id)->get();
-        return view('products.index', ["products" => $Price]);
+        return view('products.index', ["products" => $Price,"categories"=>$this->categories()]);
     }
     public function filterDate(Request $request){
-        $request->validate([
-            'date2'=>'before_or_equal:date1'
-        ]);
         $date1=$request->date1;
         $date2=$request->date2;
         $id = auth()->user()->id;
         $Date = DB::table('products')->where('created_at','>=',$date1)->where('created_at','<=',$date2)
         ->where('user_id', '=', $id)->get();
-        return view('products.index', ["products" => $Date]);
+        return view('products.index', ["products" => $Date,"categories"=>$this->categories()]);
+    }
+    public function filterCategory(Request $request){
+        $category_id=$request->category_id;
+        $id = auth()->user()->id;
+        $categorys = DB::table('products')->where('category_id','=',$category_id)
+        ->where('user_id', '=', $id)->get();
+                return view('products.index', ["products" => $categorys,"categories"=>$this->categories()]);
     }
 }

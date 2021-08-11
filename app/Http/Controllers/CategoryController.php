@@ -22,22 +22,12 @@ class CategoryController extends Controller
     }
     //----------------------------------------------------
     public function store(Request $request)
-    {
-        $request->validated();
+    {   
         $category = new Category();
         $category->name = $request->name;
-
-        if (auth()->user()->Categories()->save($category)) {
-            return response()->json([
-                'success' => true,
-                'data' => $category->toArray()
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'category not added'
-            ], 500);
-        }
+        $category->user_id = auth()->user()->id;
+        $category->save();
+        return redirect('/createProduct');
     }
     //----------------------------------------------------
     public function update(Request $request, $id)

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +37,12 @@ Route::get('editProduct/{id}', ['as' => 'editProduct', function () {
 }]);
 Route::get('/products', [ProductController::class, 'index']);
 Route::post('/filterPrice', [ProductController::class, 'filterPrice']);
-Route::post('/filterDate', [ProductController::class, 'filterDate']);
+Route::POST('/filterDate', [ProductController::class, 'filterDate']);
+Route::post('/filterCategory', [ProductController::class, 'filterCategory']);
+
 Route::post('/products', [ProductController::class, 'store']);
+
+Route::post('/categories', [CategoryController::class, 'store']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/productsEdit/{id}', [ProductController::class, 'Getupdate']);
 Route::put('/products/{id}', [ProductController::class, 'update']);
