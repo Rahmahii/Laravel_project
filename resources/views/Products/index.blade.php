@@ -15,7 +15,7 @@
         <hr style="height:2px;border-width:0;color:White;background-color:White">
         <select id="select1" onchange="displayDivDemo()">
           <option>filter by:</option>
-          <option value="1" href="{{ '/products'}}">All</option>
+          <option value="1">All</option>
           <option value="2">price</option>
           <option value="3">Date</option>
           <option value="4">Category</option>
@@ -107,7 +107,8 @@
     document.getElementById("d3").hidden = true;
     document.getElementById("d4").hidden = true;
     if (x.value == "1") {
-      window.location.href = x.children[x.selectedIndex].getAttribute('href');
+      window.location.href ="/products";
+      // x.children[x.selectedIndex].getAttribute('href');
     }
     else if (x.value == "2") {
       document.getElementById("d2").hidden = false;

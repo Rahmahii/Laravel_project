@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -22,8 +23,12 @@ class CategoryController extends Controller
     }
     //----------------------------------------------------
     public function store(Request $request)
-    {   
+    {
         $category = new Category();
+            $request->validate([
+                'name' => 'unique:categories,name,NULL,id,user_id,' .  auth()->user()->id,
+                'user_id' => 'unique:categories,user_id,NULL,id,name,' .$request->name ,
+            ]);
         $category->name = $request->name;
         $category->user_id = auth()->user()->id;
         $category->save();

@@ -29,11 +29,13 @@ Route::get('createProduct', ['as' => 'createProduct', function () {
     $masses = DB::table('masses')->get();
     $distances = DB::table('distances')->get();
     $currencies = DB::table('currencies')->get();
-    $categories = DB::table('categories')->get();
+    $id = auth()->user()->id;   
+    $categories = DB::table('categories')->where('user_id', '=', $id)->get();
     return view('products.create',['masses'=>$masses,'distances'=>$distances,'currencies'=>$currencies,'categories'=>$categories]);
 }]);
 Route::get('editProduct/{id}', ['as' => 'editProduct', function () {
-    return view('products.edit,');
+    $categories = DB::table('categories')->get();
+    return view('products.edit',['categories'=>$categories]);
 }]);
 Route::get('/products', [ProductController::class, 'index']);
 Route::post('/filterPrice', [ProductController::class, 'filterPrice']);

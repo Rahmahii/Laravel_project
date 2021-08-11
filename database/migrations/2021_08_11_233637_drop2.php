@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UniqeCategory extends Migration
+class Drop2 extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class UniqeCategory extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->unique(["user_id", "name"], 'user_category_unique');
+            $table->dropUnique(['name']);
         });
     }
 

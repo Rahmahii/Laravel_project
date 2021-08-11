@@ -11,7 +11,8 @@ use App\Http\Resources\ProductResource;
 class ProductController extends Controller
 {
      public function categories(){
-    return DB::table('categories')->get();
+        $id = auth()->user()->id;   
+    return DB::table('categories')->where('user_id', '=', $id)->get();
 }
     public function index()
     {

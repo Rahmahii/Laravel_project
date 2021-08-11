@@ -15,6 +15,14 @@
                                                 <input type="text" id="name" class="form-control"
                                                             value="{{$product->name}}" name="name">
                                     </div>
+                                    <label for="category_id">Choose a category :</label>
+                                    <br>
+                        
+                                    <select id="category_id" name="category_id" form="StoreProduct" class="form-select ">
+                                        @foreach($categories as $category)
+                                        <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
 
                                     <div class="form-group">
                                                 <label for="description">description</label>
