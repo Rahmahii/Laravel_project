@@ -34,20 +34,24 @@ Route::get('createProduct', ['as' => 'createProduct', function () {
     return view('products.create',['masses'=>$masses,'distances'=>$distances,'currencies'=>$currencies,'categories'=>$categories]);
 }]);
 Route::get('editProduct/{id}', ['as' => 'editProduct', function () {
-    $categories = DB::table('categories')->get();
+    $id = auth()->user()->id;  
+    $categories = DB::table('categories')->where('user_id', '=', $id)->get();
     return view('products.edit',['categories'=>$categories]);
 }]);
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::post('/filterPrice', [ProductController::class, 'filterPrice']);
 Route::POST('/filterDate', [ProductController::class, 'filterDate']);
 Route::post('/filterCategory', [ProductController::class, 'filterCategory']);
 
 Route::post('/products', [ProductController::class, 'store']);
-
-Route::post('/categories', [CategoryController::class, 'store']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/productsEdit/{id}', [ProductController::class, 'Getupdate']);
 Route::put('/products/{id}', [ProductController::class, 'update']);
 Route::get('/products/{id}/delete', [ProductController::class, 'destroy']);
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+Route::post('/categories', [CategoryController::class, 'store']);
+Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy']);
+Route::put('/categories/{id}', [CategoryController::class, 'update']);
 
 require __DIR__ . '/auth.php';

@@ -38,13 +38,13 @@ class ProductController extends Controller
     {
         $product = auth()->user()->products()->find($id);
 
-        return view('products.edit', ["product" => $product]);
+        return view('products.edit', ["product" => $product,"categories"=>$this->categories()]);
     }
     public function update(ProductRequest $request, $id)
     {
         $product = auth()->user()->products()->find($id);
          $this->requests($request, $product)->save();
-         return $this->show($id);
+         return view('products.show', ["product" => $product]);
     }
 
     public function destroy( $id)

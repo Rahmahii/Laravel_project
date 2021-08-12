@@ -2,8 +2,8 @@
 
 @section('content')
 <h2>Products</h2>
-<hr>
 <div class="container">
+<hr>
 <div class="row">
   <div class="col-md-9">
     <div class="row">
@@ -11,7 +11,7 @@
         <a href="{{ ('createProduct')
           }}" class="btn
           btn-success btn-lg">add
-          products</a>
+          product</a>
         <hr style="height:2px;border-width:0;color:White;background-color:White">
         <select id="select1" onchange="displayDivDemo()">
           <option>filter by:</option>
@@ -52,13 +52,12 @@
             <input type="submit" value="filter">
           </form>
         </div>
-        <hr style="height:2px;border-width:0;color:White;background-color:White">
+        <hr style="height:2px;border-width:0;color:White;background-color:White;">
 
         @foreach($products as $product)
         <div class="col-md-4">
           <div class="card
-            mb-3" style="min-width:
-            18rem;">
+            mb-3" style="outline:10px">
             <div class="card-header
             bg-dark
             text-white">
@@ -119,13 +118,5 @@
     }
   }
 </script>
-<script>
-  function openForm() {
-      document.getElementById("myForm").style.display = "block";
-  }
 
-  function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-  }
-</script>
 @endsection

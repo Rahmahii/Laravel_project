@@ -109,6 +109,15 @@
                 <input type="text" placeholder="Enter name" name="name" required>
                 <button type="submit" class="btn">create</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                 @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             </form>
         </div>
 
@@ -116,13 +125,5 @@
 
     </div>
 </div>
-<script>
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
 
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>
 @endsection

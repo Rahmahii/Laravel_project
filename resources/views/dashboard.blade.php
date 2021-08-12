@@ -7,8 +7,11 @@
                 You're logged in!
                 <a href="{{ '/products'}}"
                     class="btn btn-danger">
-                    All my Products</a>
-                    
+                    All my Products</a> 
+                    <br>
+                    <a href="{{ '/categories'}}"
+                    class="btn btn-danger">
+                    All my categories</a>            
             </div>
         </div>
     </div>

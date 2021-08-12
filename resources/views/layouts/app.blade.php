@@ -11,6 +11,15 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+      function openForm() {
+          document.getElementById("myForm").style.display = "block";
+      }
+  
+      function closeForm() {
+          document.getElementById("myForm").style.display = "none";
+      }
+  </script>
 
 
     <!-- Fonts -->
@@ -37,7 +46,7 @@
           right: 28px;
           width: 280px;
         }
-        
+     
         /* The popup form - hidden by default */
         .form-popup {
           display: none;
@@ -92,21 +101,30 @@
           opacity: 1;
         }
         </style>
+         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
   
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav id="nn"class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand " href="{{ url('/') }}">
                     Rahmah
                 </a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
 
                     <!-- Right Side Of Navbar -->
 
                     <ul class="navbar-nav ml-auto">
+                        @if(Route::current()->getName() != 'register' && Route::current()->getName() != 'login' && Route::current()->getName() != 'products')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{('/products') }}">
+                                Products
+                            </a>
+                        </li>
+                        @endif
+                        
                         @if(Route::current()->getName() != 'register' && Route::current()->getName() != 'login')
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('logout') }}">
@@ -128,14 +146,15 @@
 
                         @endif
 
-
                     </ul>
                 </div>
             </div>
         </nav>
 
         <main class="py-4">
+            <div class="bg-light p-5 rounded">
             @yield('content')
+        </div>
         </main>
     </div>
 </body>
