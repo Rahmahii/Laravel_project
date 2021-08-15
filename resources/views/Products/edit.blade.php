@@ -38,16 +38,35 @@
         <input type="number" id="width" class="form-control" value="{{$product->width}}" name="width">
       </div>
       <div class="form-group">
-        <label for="weight">weight</label>
-        <input type="number" id="weight" class="form-control" value="{{$product->weight}}" name="weight">
-      </div>
-      <div class="form-group">
         <label for="depth">depth</label>
         <input type="number" id="depth" class="form-control" value="{{$product->depth}}" name="depth">
       </div>
+      <label for="distance_id">Choose an Unit Measure distance:</label>
+      <br>
+      <select id="distance_id" name="distance_id" form="StoreProduct" class="form-select ">
+        @foreach($distances as $distance)
+        <option value="{{ $distance->id }}"> {{ $distance->name }}</option>
+        @endforeach
+      </select>
+      <div class="form-group">
+        <label for="weight">weight</label>
+        <input type="number" id="weight" class="form-control" value="{{$product->weight}}" name="weight">
+      </div>
+      <label for="mass_id ">Choose an Unit Measure mass:</label>
+      <br>
+      <select id="mass_id" name="mass_id" form="StoreProduct" class="form-select ">
+        @foreach($masses as $mass)
+        <option value="{{ $mass->id }}"> {{ $mass->name }}</option>
+        @endforeach
+      </select>
       <div class="form-group">
         <label for="price">price</label>
         <input type="number" id="price" class="form-control" value="{{$product->price}}" name="price">
+        <select id="currency_id" name="currency_id" form="StoreProduct">
+          @foreach($currencies as $currency)
+          <option value="{{ $currency->id }}"> {{ $currency->name }}</option>
+          @endforeach
+        </select>
       </div>
       <div class="form-group">
         <label for="quantity">quantity</label>

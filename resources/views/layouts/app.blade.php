@@ -11,16 +11,6 @@
 
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
-  <script>
-    function openForm() {
-      document.getElementById("myForm").style.display = "block";
-    }
-
-    function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    }
-  </script>
-
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -140,8 +130,7 @@
             </li>
             @endif
             <!-- Authentication Links -->
-            @if(Route::current()->getName() ==
-            'register')
+            @if(Route::current()->getName() == 'register')
             <li class="nav-item">
               <a class="nav-link" href="{{ route('login') }}">Login</a>
             </li>

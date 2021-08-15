@@ -8,10 +8,8 @@
     <div class="col-md-9">
       <div class="row">
         <div class="row">
-          <a href="{{ ('createProduct')
-          }}" class="btn
-          btn-success btn-lg">add
-            product</a>
+          <a href="{{ ('createProduct')}}" class="btn btn-success btn-lg">add product</a>
+          <a style="outline:10px; width: auto;" href="{{ '/categories'}}" class="btn btn-secondary btn-sm">  All my categories</a>
           <hr style="height:2px;border-width:0;color:White;background-color:White">
           <select id="select1" onchange="displayDivDemo()">
             <option>filter by:</option>
@@ -56,11 +54,8 @@
 
           @foreach($products as $product)
           <div class="col-md-4">
-            <div class="card
-            mb-3" style="outline:10px">
-              <div class="card-header
-            bg-dark
-            text-white">
+            <div class="card  mb-3" style="outline:10px">
+              <div class="card-header bg-dark text-white">
                 {{$product->name}}
               </div>
               <div class="card-body">
