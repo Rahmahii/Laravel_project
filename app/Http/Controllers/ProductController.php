@@ -48,7 +48,7 @@ class ProductController extends Controller
   {
     $product = auth()->user()->products()->find($id);
     $this->requests($request, $product)->save();
-    return view('products.show', ["product" => $product]);
+    return Redirect::route('showproducts', [$product->id])->with('success','product updated successfully!');
   }
 
   public function destroy($id)
