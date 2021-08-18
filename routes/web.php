@@ -44,7 +44,7 @@ Route::POST('/filterDate', [ProductController::class, 'filterDate']);
 Route::post('/filterCategory', [ProductController::class, 'filterCategory']);
 
 Route::post('/products', [ProductController::class, 'store']);
-Route::get('/products/{id}', [ProductController::class, 'show']);
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('showproducts');
 Route::get('/productsEdit/{id}', [ProductController::class, 'Getupdate']);
 Route::put('/products/{id}', [ProductController::class, 'update']);
 Route::get('/products/{id}/delete', [ProductController::class, 'destroy']);

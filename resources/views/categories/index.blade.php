@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@include('categories.createModel')
 <div class="container">
   <div class="row">
     <div class="col-md-9">
@@ -27,7 +27,7 @@
         @endforeach
 
         @include('categories.EditModel')
-        @include('categories.createModel')
+       
 
         @if ($categories->isEmpty())
 

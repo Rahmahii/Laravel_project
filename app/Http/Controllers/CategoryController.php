@@ -32,11 +32,12 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->user_id = auth()->user()->id;
         $category->save();
-                if (url()->previous()==url('createProduct')){
-            return redirect('/createProduct');
-        }elseif(url()->previous()==url('categories')){
-            return redirect('/categories');
-        }
+        return back()->with('success','category added successfully!');
+        //         if (url()->previous()==url('createProduct')){
+        //     return redirect('/createProduct')->with('success','category added successfully!');
+        // }elseif(url()->previous()==url('categories')){
+        //     return redirect('/categories')->with('success','category added successfully!');;
+        // }
     }
     //----------------------------------------------------
     public function update(Request $request, $id)
@@ -46,13 +47,13 @@ class CategoryController extends Controller
     ]);
         $category = auth()->user()->Categories()->find($id);
        $category->fill($request->all())->save();
-       return redirect('/categories');
+       return redirect('/categories')->with('success','category updated successfully!');
     }
     //----------------------------------------------------
     public function destroy($id)
     {
      auth()->user()->Categories()->find($id)->delete();
-     return redirect('/categories');
+     return redirect('/categories')->with('success','category deleted successfully!');
 
     }
 }

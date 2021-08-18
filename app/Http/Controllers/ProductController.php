@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ProductResource;
+use Redirect;
 
 class ProductController extends Controller
 {
@@ -33,7 +34,7 @@ class ProductController extends Controller
     $request->validated();
     $product = new product();
     $this->requests($request, $product)->save();
-    return $this->show($product->id);
+    return Redirect::route('showproducts', [$product->id])->with('success','product added successfully!');
   }
   public function Getupdate($id)
   {
@@ -53,7 +54,7 @@ class ProductController extends Controller
   public function destroy($id)
   {
     auth()->user()->products()->find($id)->delete();
-    return redirect('/products');
+    return redirect('/products')->with('success','product deleted successfully!');;
   }
   public function requests($request, product $product)
   {

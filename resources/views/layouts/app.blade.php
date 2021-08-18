@@ -149,6 +149,7 @@
 
     <main class="py-4">
       <div class="bg-light p-5 rounded">
+        @include('flash-message')
         @yield('content')
       </div>
     </main>
