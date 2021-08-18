@@ -6,6 +6,8 @@
       <div class="p-6 bg-white border-b border-gray-200">
         <a style="outline:10px" href="{{ '/categories'}}" class="btn btn-danger">
           All my categories</a>
+          <a style="outline:10px" href="{{ '/clients'}}" class="btn btn-danger">
+            All my clients</a>
       </div>
     </div>
   </div>

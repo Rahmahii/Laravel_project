@@ -54,7 +54,7 @@ class ProductController extends Controller
   public function destroy($id)
   {
     auth()->user()->products()->find($id)->delete();
-    return redirect('/products')->with('success','product deleted successfully!');;
+    return redirect('/products')->with('success','product deleted successfully!');
   }
   public function requests($request, product $product)
   {

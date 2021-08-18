@@ -80,10 +80,7 @@
                             <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                 {{ __('Already registered?') }}
                             </a>
-
-                            <x-button class="ml-3 btn btn-primary">
-                                {{ __('Register') }}
-                            </x-button>
+                            <input type="submit" class="ml-3 btn btn-primary" value="Register">
                         </div>
                     </form>
                 </div>

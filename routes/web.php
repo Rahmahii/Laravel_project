@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +39,14 @@ Route::get('editProduct/{id}', ['as' => 'editProduct', function () {
     $categories = DB::table('categories')->where('user_id', '=', $id)->get();
     return view('products.edit',['categories'=>$categories]);
 }]);
-Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('createClient', ['as' => 'createClient', function () {
+  return view('clients.create');
+}]);
 Route::post('/filterPrice', [ProductController::class, 'filterPrice']);
 Route::POST('/filterDate', [ProductController::class, 'filterDate']);
 Route::post('/filterCategory', [ProductController::class, 'filterCategory']);
 
+Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::post('/products', [ProductController::class, 'store']);
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('showproducts');
 Route::get('/productsEdit/{id}', [ProductController::class, 'Getupdate']);
@@ -51,7 +55,11 @@ Route::get('/products/{id}/delete', [ProductController::class, 'destroy']);
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::post('/categories', [CategoryController::class, 'store']);
-Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy']);
 Route::put('/categories/{id}', [CategoryController::class, 'update']);
+Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy']);
+
+Route::get('/clients', [ClientController::class, 'index'])->name('clients');
+Route::post('/clients', [ClientController::class, 'store']);
+Route::get('/clients/{id}/delete', [ClientController::class, 'destroy']);
 
 require __DIR__ . '/auth.php';
