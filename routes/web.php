@@ -34,12 +34,9 @@ Route::get('createProduct', ['as' => 'createProduct', function () {
     $categories = DB::table('categories')->where('user_id', '=', $id)->get();
     return view('products.create',['masses'=>$masses,'distances'=>$distances,'currencies'=>$currencies,'categories'=>$categories]);
 }]);
-Route::get('editProduct/{id}', ['as' => 'editProduct', function () {
-    $id = auth()->user()->id;  
-    $categories = DB::table('categories')->where('user_id', '=', $id)->get();
-    return view('products.edit',['categories'=>$categories]);
-}]);
+
 Route::get('createClient', ['as' => 'createClient', function () {
+
   return view('clients.create');
 }]);
 Route::post('/filterPrice', [ProductController::class, 'filterPrice']);
@@ -60,6 +57,8 @@ Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy']);
 
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
 Route::post('/clients', [ClientController::class, 'store']);
+Route::get('/clientsEdit/{id}', [ClientController::class, 'Getupdate']);
+Route::put('/clients/{id}', [ClientController::class, 'update']);
 Route::get('/clients/{id}/delete', [ClientController::class, 'destroy']);
 
 require __DIR__ . '/auth.php';

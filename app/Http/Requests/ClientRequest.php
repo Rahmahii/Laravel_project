@@ -13,7 +13,7 @@ class ClientRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,15 +23,27 @@ class ClientRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-          // 'email' => 'unique:clients,email,NULL,id,user_id,' .  auth()->user()->id,
-          // 'phone' => 'unique:clients,phone,NULL,id,user_id,' .  auth()->user()->id,
-          // 'user_id' => 'unique:clients,user_id,NULL,id,email,' . $request->email,
+      $rules = [
+         
           'fname' => 'required',
           'lname' => 'required',
           'address'=>'nullable',
           'country_id' => 'required',
           'city_id' => 'required'
         ];
+        if ($this->getMethod() == 'POST') {
+          $rules += [ 'email' => 'unique:clients,email,NULL,id,user_id,' .  auth()->user()->id,
+          'phone' => 'unique:clients,phone,NULL,id,user_id,' .  auth()->user()->id,
+          'user_id' => 'unique:clients,user_id,NULL,id,email,' . $this->request->get('email'),
+          'unique:clients,user_id,NULL,id,phone,' . $this->request->get('phone')];
+        }elseif ($this->getMethod() == 'PUT') {
+          $rules += [ 'email' => 'unique:clients,email,NULL,id,user_id,' .  $this->user,
+          'phone' => 'unique:clients,phone,NULL,id,user_id,' .  $this->user,
+          'user_id' => 'unique:clients,user_id,NULL,id,email,' . $this->email
+          ,'unique:clients,user_id,NULL,id,phone,' . $this->phone
+        ];
+          
+        }
+        return $rules;
     }
 }

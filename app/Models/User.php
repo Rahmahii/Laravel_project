@@ -49,11 +49,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Product::class);
     }
-    public function Categories()
+    public function categories()
     {
         return $this->hasMany(Category::class);
     }
-    public function Clients()
+    public function clients()
     {
         return $this->hasMany(Client::class);
     }

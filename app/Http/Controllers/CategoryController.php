@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $category = auth()->user()->Categories;
+        $category = auth()->user()->categories;
         return view('categories.index', ["categories" => $category]);
     }
     //----------------------------------------------------  

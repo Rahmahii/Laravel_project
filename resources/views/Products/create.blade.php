@@ -7,7 +7,6 @@
     <h3>Add new product</h3>
     <hr>
     <form action="{{__('products')}}" method="POST" id="StoreProduct" enctype="multipart/form-data">
-
       @csrf
       <div class="form-group">
         <label for="name">name</label>

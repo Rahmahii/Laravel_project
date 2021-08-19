@@ -13,13 +13,10 @@
             </div>
             <div class="card-body">
               <div class="card-title">
-                <h4>
-                  price:
-                  {{$product->price}}
-                </h4>
+               {{$client->country->name}}, {{$client->city->name}}
               </div>
-                <a href="" class="btn btn-primary">
-                  Edit </a>
+                <a href="{{ ('/clientsEdit/'.$client->id)}}" class="btn btn-primary">
+                  show more </a>
                 <a href="{{ '/clients/' . $client->id.'/delete/'}}" class="btn btn-danger ">
                   Delete</a>
             </div>
