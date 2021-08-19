@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\ClientRequest;
+use Redirect;
 
 class ClientController extends Controller
 {
@@ -13,9 +14,10 @@ class ClientController extends Controller
     return view('clients.index', ["clients" => $client]);
   }
 
-  public function show(Client $client)
+  public function show($id)
   {
-    //
+    $client=auth()->user()->clients()->find($id);
+    return view('clients.show', ["client" => $client]);
   }
   public function store(ClientRequest $request)
   {
@@ -30,7 +32,7 @@ class ClientController extends Controller
     $client->city_id = $request->city_id;
     $client->user_id = auth()->user()->id;
     $client->save();
-    return redirect('/clients')->with('success', 'client added successfully!');
+    return Redirect::route('showclient', [$client->id])->with('success', 'client added successfully!');
   }
   public function Getupdate($id)
   {
@@ -49,7 +51,7 @@ class ClientController extends Controller
     $client->city_id = $request->city_id;
     $client->user_id = auth()->user()->id;
     $client->save();
-    return redirect('/clients')->with('success','client updated successfully!');
+    return Redirect::route('showclient', [$client->id])->with('success','client updated successfully!');
   }
 
   public function destroy($id)

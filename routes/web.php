@@ -44,8 +44,8 @@ Route::POST('/filterDate', [ProductController::class, 'filterDate']);
 Route::post('/filterCategory', [ProductController::class, 'filterCategory']);
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
-Route::post('/products', [ProductController::class, 'store']);
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('showproducts');
+Route::post('/products', [ProductController::class, 'store']);
 Route::get('/productsEdit/{id}', [ProductController::class, 'Getupdate']);
 Route::put('/products/{id}', [ProductController::class, 'update']);
 Route::get('/products/{id}/delete', [ProductController::class, 'destroy']);
@@ -56,6 +56,7 @@ Route::put('/categories/{id}', [CategoryController::class, 'update']);
 Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy']);
 
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
+Route::get('/clients/{id}', [ClientController::class, 'show'])->name('showclient');
 Route::post('/clients', [ClientController::class, 'store']);
 Route::get('/clientsEdit/{id}', [ClientController::class, 'Getupdate']);
 Route::put('/clients/{id}', [ClientController::class, 'update']);
