@@ -25,7 +25,7 @@
 
     <form method="post " action="{{ route( 'register') }} " id="package ">
       @csrf
-      <label for="cars ">Choose a package:</label>
+      <label for="mytext ">Choose a package:</label>
       <br>
       <select id="mytext" class="form-select " aria-label="Default select example ">
         @foreach($packages as $package)

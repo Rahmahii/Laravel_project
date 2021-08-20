@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ShipmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,5 +62,8 @@ Route::post('/clients', [ClientController::class, 'store']);
 Route::get('/clientsEdit/{id}', [ClientController::class, 'Getupdate']);
 Route::put('/clients/{id}', [ClientController::class, 'update']);
 Route::get('/clients/{id}/delete', [ClientController::class, 'destroy']);
+
+Route::get('/shipments', [ShipmentController::class, 'store']);
+Route::post('/shipments/{id}', [ShipmentController::class, 'storeShipmentProduct']);
 
 require __DIR__ . '/auth.php';

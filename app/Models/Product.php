@@ -45,5 +45,9 @@ class Product extends Model
             { 
                 return $this->belongsTo(Currency::class);
             }
+            public function shipment()
+            {
+              return $this->belongsToMany(Shipment::class,'shipment_product','product_id','shipment_id');
+            }
           
 }
