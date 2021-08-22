@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ShipmentController;
+use App\Models\Client;
+use App\Http\Requests\ClientRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +39,13 @@ Route::get('createProduct', ['as' => 'createProduct', function () {
 }]);
 
 Route::get('createClient', ['as' => 'createClient', function () {
-
+  //  $request=new ClientRequest();
+  // $request->validated();
+ // $client = new Client();
   return view('clients.create');
 }]);
+//Route::get('/createClient', [ClientController::class, 'create']);
+
 Route::post('/filterPrice', [ProductController::class, 'filterPrice']);
 Route::POST('/filterDate', [ProductController::class, 'filterDate']);
 Route::post('/filterCategory', [ProductController::class, 'filterCategory']);

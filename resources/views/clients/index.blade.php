@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-9">
       <div class="row">
-        <a href="{{ ('createClient')}}"  class="btn btn-success btn-lg">add client</a>
+        <a href="{{ ('/createClient')}}"  class="btn btn-success btn-lg">add client</a>
         <hr style="height:2px;border-width:0;color:White;background-color:White">
         @foreach($clients as $client)
         <div class="col-md-4">

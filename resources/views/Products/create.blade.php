@@ -10,7 +10,7 @@
       @csrf
       <div class="form-group">
         <label for="name">name</label>
-        <input type="text" name="name" id="name" class="form-control" required>
+        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" required>
       </div>
       <label for="category_id">Choose a category :</label>
       <br>
@@ -24,21 +24,21 @@
 
       <div class="form-group">
         <label for="description">description</label>
-        <textarea name="description" id="description" cols="30" rows="4" class="form-control"></textarea>
+        <textarea name="description" id="description" value="{{ old('description') }}" cols="10" rows="4" class="form-control"></textarea>
       </div>
 
 
       <div class="form-group">
         <label for="height">height</label>
-        <input type="number" name="height" id="height" class="form-control" required>
+        <input type="number" name="height" id="height" value="{{ old('height') }}" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="width">width</label>
-        <input type="number" name="width" id="width" class="form-control" required>
+        <input type="number" name="width" id="width" value="{{ old('width') }}" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="depth">depth</label>
-        <input type="number" name="depth" id="depth" class="form-control" required>
+        <input type="number" name="depth" id="depth" value="{{ old('depth') }}"class="form-control" required>
       </div>
       <label for="distance_id">Choose an Unit Measure distance:</label>
       <br>
@@ -49,7 +49,7 @@
       </select>
       <div class="form-group">
         <label for="weight">weight</label>
-        <input type="number" name="weight" id="weight" class="form-control" required>
+        <input type="number" name="weight" id="weight" value="{{ old('weight') }}" class="form-control" required>
       </div>
       <label for="mass_id ">Choose an Unit Measure mass:</label>
       <br>
@@ -61,7 +61,7 @@
 
       <div class="form-group">
         <label for="price">price</label>
-        <input type="number" name="price" id="price" class="form-control" required>
+        <input type="number" name="price" id="price" value="{{ old('price') }}" class="form-control" required>
         <select id="currency_id" name="currency_id" form="StoreProduct">
           @foreach($currencies as $currency)
           <option value="{{ $currency->id }}"> {{ $currency->name }}</option>
@@ -70,11 +70,11 @@
       </div>
       <div class="form-group">
         <label for="quantity">quantity</label>
-        <input type="number" name="quantity" id="quantity" class="form-control" required>
+        <input type="number" name="quantity" id="quantity" value="{{ old('quantity') }}" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="image">image</label>
-        <input type="file" name="image" id="image" accept="image/*" class="form-control" onchange="loadFile(event)" required>
+        <input type="file" name="image" id="image" value="{{ old('image') }}" accept="image/*" class="form-control" onchange="loadFile(event)" required>
         <p><img id="output" width="200" /></p>
       </div>
       <script>

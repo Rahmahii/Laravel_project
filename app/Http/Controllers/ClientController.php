@@ -10,19 +10,24 @@ use Redirect;
 class ClientController extends Controller
 {
   public function index()
-  { $client = auth()->user()->clients;
+  {
+    $client = auth()->user()->clients;
     return view('clients.index', ["clients" => $client]);
   }
 
   public function show($id)
   {
-    $client=auth()->user()->clients()->find($id);
+    $client = auth()->user()->clients()->find($id);
     return view('clients.show', ["client" => $client]);
   }
+//   public function create()
+// { $client = new Client();  
+//     return view('clients.create', ["client" => $client]);
+//   }
   public function store(ClientRequest $request)
-  {
-    $request->validated();
+  { 
     $client = new Client();
+    $request->validated();
     $client->fname = $request->fname;
     $client->lname = $request->lname;
     $client->phone = $request->phone;
@@ -51,7 +56,7 @@ class ClientController extends Controller
     $client->city_id = $request->city_id;
     $client->user_id = auth()->user()->id;
     $client->save();
-    return Redirect::route('showclient', [$client->id])->with('success','client updated successfully!');
+    return Redirect::route('showclient', [$client->id])->with('success', 'client updated successfully!');
   }
 
   public function destroy($id)
