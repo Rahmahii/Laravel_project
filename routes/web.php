@@ -39,12 +39,8 @@ Route::get('createProduct', ['as' => 'createProduct', function () {
 }]);
 
 Route::get('createClient', ['as' => 'createClient', function () {
-  //  $request=new ClientRequest();
-  // $request->validated();
- // $client = new Client();
   return view('clients.create');
 }]);
-//Route::get('/createClient', [ClientController::class, 'create']);
 
 Route::post('/filterPrice', [ProductController::class, 'filterPrice']);
 Route::POST('/filterDate', [ProductController::class, 'filterDate']);
@@ -69,7 +65,9 @@ Route::get('/clientsEdit/{id}', [ClientController::class, 'Getupdate']);
 Route::put('/clients/{id}', [ClientController::class, 'update']);
 Route::get('/clients/{id}/delete', [ClientController::class, 'destroy']);
 
-Route::get('/shipments', [ShipmentController::class, 'store']);
+Route::get('/Shipments', [ShipmentController::class, 'index']);
+Route::get('/CreateShipments', [ShipmentController::class, 'create']);
+Route::post('/Storeshipments', [ShipmentController::class, 'store']);
 Route::post('/shipments/{id}', [ShipmentController::class, 'storeShipmentProduct']);
 
 require __DIR__ . '/auth.php';

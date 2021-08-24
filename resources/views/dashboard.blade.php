@@ -8,7 +8,7 @@
           All my categories</a>
           <a style="outline:10px" href="{{ '/clients'}}" class="btn btn-danger">
             All my clients</a>
-            <a style="outline:10px" href="{{ '/shipments'}}" class="btn btn-danger">
+            <a style="outline:10px" href="{{ '/CreateShipments'}}" class="btn btn-danger">
             shipments</a>
       </div>
     </div>

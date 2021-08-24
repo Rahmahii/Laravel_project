@@ -57,7 +57,7 @@ class User extends Authenticatable
   {
     return $this->hasMany(Client::class);
   }
-  public function shipment()
+  public function shipments()
   {
     return $this->hasMany(Shipment::class);
   }

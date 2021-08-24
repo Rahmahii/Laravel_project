@@ -27,8 +27,8 @@ class Shipment extends Model
   {
     return $this->belongsTo(carrier::class);
   }
-  public function product()
+  public function products()
   {
-    return $this->belongsToMany(Product::class,'shipment_product','shipment_id','product_id');
+    return $this->belongsToMany(Product::class)->withPivot(['quantity','price']);
   }
 }

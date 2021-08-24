@@ -38,7 +38,6 @@ class   ProductRequest extends FormRequest
       'mass_id' => 'numeric ',
       'distance_id' => 'numeric ',
       'category_id' => 'numeric|nullable ',
-      'name' => 'required'
     ];
     if ($this->getMethod() == 'POST') {
       $rules += [ 'name' => 'unique:products,name,NULL,id,user_id,' .  auth()->user()->id,

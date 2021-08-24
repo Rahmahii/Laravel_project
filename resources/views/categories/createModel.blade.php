@@ -4,7 +4,7 @@
     @csrf
     <h3>Create Category</h3>
     <label for="name"><b>name</b></label>
-    <input type="text" placeholder="Enter name" name="name" required>
+    <input type="text" value="{{old('name')}}" placeholder="Enter name" name="name" required>
     <button type="submit" class="btn">create</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>

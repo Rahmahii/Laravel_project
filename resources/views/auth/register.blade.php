@@ -74,7 +74,15 @@
                                 <input id="BirthDate" type="date" class="form-control{{ $errors->has('Birthday') ? ' is-invalid' : '' }}" name="BirthDate" value="{{ old('Birthday') }}">
                             </div>
                         </div>
-
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                          <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                          </ul>
+                        </div>
+                        @endif
                         <div class="flex items-center justify-end mt-4  col-sm-10">
 
                             <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
