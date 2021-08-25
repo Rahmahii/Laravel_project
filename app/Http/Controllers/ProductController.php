@@ -13,8 +13,9 @@ class ProductController extends Controller
 {
   public function categories()
   {
-    $id = auth()->user()->id;
-    return DB::table('categories')->where('user_id', '=', $id)->get();
+    // $id = auth()->user()->id;
+    // return DB::table('categories')->where('user_id', '=', $id)->get();
+    return auth()->user()->categories;
   }
   public function index()
   {
@@ -25,7 +26,7 @@ class ProductController extends Controller
   public function show($id)
   {
     //$product = auth()->user()->products()->find($id);
-    $product = new ProductResource(Product::with('Distance', 'Mass', 'Category', 'Currency')->find($id));
+    $product = Product::with('Distance', 'Mass', 'Category', 'Currency')->find($id);
 
     return view('products.show', ["product" => $product]);
   }
@@ -36,7 +37,7 @@ class ProductController extends Controller
     $this->requests($request, $product)->save();
     return Redirect::route('showproducts', [$product->id])->with('success','product added successfully!');
   }
-  public function Getupdate($id)
+  public function edit($id)
   {
     $product = auth()->user()->products()->find($id);
     $masses = DB::table('masses')->get();

@@ -39,7 +39,7 @@ class ClientController extends Controller
     $client->save();
     return Redirect::route('showclient', [$client->id])->with('success', 'client added successfully!');
   }
-  public function Getupdate($id)
+  public function edit($id)
   {
     $client = auth()->user()->clients()->find($id);
     return view('clients.edit', ["client" => $client]);

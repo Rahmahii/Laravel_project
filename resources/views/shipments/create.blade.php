@@ -1,18 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="{{('/Storeshipments')}}" method="POST" id="StoreProductShipment" enctype="multipart/form-data">
+
+
+<form action="{{('/shipments')}}" method="POST" id="StoreProductShipment" enctype="multipart/form-data">
   @csrf
 
-  <label for="client_id">choose client :</label>
+  <label for="client_id">choose shipment's owner :</label>
   <select name="client_id" id="client_id" class="form-control">
+    <option value="">-- choose client --</option>
     @foreach ($clients as $client)
     <option value="{{ $client->id }}">{{ $client->fname }} {{ $client->lname }}</option>
     @endforeach
   </select>
 
-  <label for="carrier_id">choose carrier :</label>
+  <label for="carrier_id">choose shipment's delivery :</label>
   <select name="carrier_id" id="carrier_id" class="form-control">
+    <option value="">-- choose carrier --</option>
     @foreach ($carriers as $carrier)
     <option value="{{ $carrier->id }}">{{ $carrier->name }} ({{ $carrier->price }})</option>
     @endforeach
@@ -39,7 +43,11 @@
                 <option value="">-- choose product --</option>
                 @foreach ($products as $product)
                 <option value="{{ $product->id }}">
-                  {{ $product->name }} (${{ number_format($product->price, 2) }})
+                  {{ $product->name }} ({{$product->price }}
+                  <span>
+                    @if(!is_null($product->currency_id))
+                    {{$product->currency->name}}
+                    @endif</span>)
                 </option>
                 @endforeach
               </select>
@@ -54,18 +62,17 @@
           </tr>
           <tr id="product1"></tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <button id="add_row" name="add_row" class="btn btn-default">+ Add Row</button>
+            <button id='delete_row' class=" btn btn-danger">- Delete Row</button>
+          </tr>
+        </tfoot>
       </table>
-
-      <div class="row">
-        <div class="col-md-12">
-          <button id="add_row" name="add_row" class="btn btn-default pull-left">+ Add Row</button>
-          <button id='delete_row' class="pull-right btn btn-danger">- Delete Row</button>
-        </div>
-      </div>
     </div>
   </div>
   <div>
-    <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+    <input class="btn btn-danger" type="submit" value="Save shipment">
   </div>
 </form>
 

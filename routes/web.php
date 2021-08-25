@@ -49,7 +49,7 @@ Route::post('/filterCategory', [ProductController::class, 'filterCategory']);
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('showproducts');
 Route::post('/products', [ProductController::class, 'store']);
-Route::get('/productsEdit/{id}', [ProductController::class, 'Getupdate']);
+Route::get('/productsEdit/{id}', [ProductController::class, 'edit']);
 Route::put('/products/{id}', [ProductController::class, 'update']);
 Route::get('/products/{id}/delete', [ProductController::class, 'destroy']);
 
@@ -61,13 +61,16 @@ Route::get('/categories/{id}/delete', [CategoryController::class, 'destroy']);
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
 Route::get('/clients/{id}', [ClientController::class, 'show'])->name('showclient');
 Route::post('/clients', [ClientController::class, 'store']);
-Route::get('/clientsEdit/{id}', [ClientController::class, 'Getupdate']);
+Route::get('/clientsEdit/{id}', [ClientController::class, 'edit']);
 Route::put('/clients/{id}', [ClientController::class, 'update']);
 Route::get('/clients/{id}/delete', [ClientController::class, 'destroy']);
 
-Route::get('/Shipments', [ShipmentController::class, 'index']);
+Route::get('/shipments', [ShipmentController::class, 'index'])->name('shipments');
+Route::get('/shipments/{id}', [ShipmentController::class, 'show'])->name('showShipments');
 Route::get('/CreateShipments', [ShipmentController::class, 'create']);
-Route::post('/Storeshipments', [ShipmentController::class, 'store']);
-Route::post('/shipments/{id}', [ShipmentController::class, 'storeShipmentProduct']);
+Route::post('/shipments', [ShipmentController::class, 'store']);
+Route::get('/shipmentsEdit/{id}', [ShipmentController::class, 'edit']);
+Route::put('/shipments/{id}', [ShipmentController::class, 'update']);
+Route::get('/shipments/{id}/delete', [ShipmentController::class, 'destroy']);
 
 require __DIR__ . '/auth.php';
