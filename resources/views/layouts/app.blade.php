@@ -115,7 +115,7 @@
     <nav id="nn" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container">
         @auth
-        <a class="navbar-brand " href="{{ url('/') }}">
+        <a class="navbar-brand " href="{{ ('/profile') }}">
           {{auth()->user()->name}}
         </a>
         <ul class="navbar-nav ml-auto">

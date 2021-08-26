@@ -8,74 +8,41 @@
       <div class="card-body">
         <div class="card-title">
           <h4>
-            {{$user['name']}}
+           {{$user->name}} informations: 
           </h4>
         </div>
-        @if(!is_null($product->category_id))
+        @if(!is_null($user->package_id))
         <div class="card-text">
-          <h5> <small> category:</small>
-            {{$product->category->name}}
-          </h5>
+         <h5><big>package name: </big> {{$user->package->name}}</h5>
+        </div>
+        <div class="card-text">
+         <h5> <big>package price: </big> {{$user->package->price}} </h5>
         </div>
         @endif
         <div class="card-text">
-          description:
-          {{$product['description']}}
+        <h5>  <big>username: </big>{{$user->username}}</h5>
         </div>
         <div class="card-text">
-          height:
-          {{$product['height']}} @if(!is_null($product->distance_id))
-          {{$product->distance->name}}
-          @endif
+         <h5> <big>phone: </big>{{$user->phone}} </h5>
         </div>
 
         <div class="card-text">
-          width:
-          {{$product['width']}} @if(!is_null($product->distance_id))
-          {{$product->distance->name}}
-          @endif
+         <h5> <big>email: </big>{{$user->email}} </h5>
         </div>
 
         <div class="card-text">
-          weight:
-          {{$product['weight']}}
-          <span> @if(!is_null($product->mass_id))
-            {{$product->mass->name}}
-            @endif</span>
+         <h5> <big> Birthday:</big> {{$user->BirthDate}}</h5>
         </div>
-        <div class="card-text">
-          depth:
-          {{$product['depth']}} @if(!is_null($product->distance_id))
-          {{$product->distance->name}}
-          @endif
-        </div>
-        <div class="card-text">
-          price:
-          {{$product['price']}}
-
-          <span>
-            @if(!is_null($product->currency_id))
-            {{$product->currency->name}}
-            @endif</span>
-        </div>
-        <div class="card-text">
-          quantity:
-          {{$product['quantity']}}
-        </div>
-        <div class="card-text">
-          image:<br><img src="{{asset('images/'.$product['image'])}}" width="100px" height="100px">
-        </div>
-
+        
         <hr>
         <small class="text-muted">
           <p>
-            {{$product['created_at']}}
+           <h6> regester date: {{$user->created_at}}</h6>
           </p>
         </small>
 
-        <a href="{{ ('/productsEdit/'.$product['id'])}}" class="btn btn-primary float-left mr-2">
+        <a href="{{('/Editprofile')}}" class="btn btn-primary float-left mr-2">
           Edit</a>
-
       </div>
     </div>
   </div>

@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'username' => 'required|min:4|unique:users|regex:/^[A-Za-z0-9_]+$/',
             'password_confirmation' => 'min:6|required|same:password',
-            'Birthday' => 'date|before:today',
+            'BirthDate' => 'date|before:today',
             'phone' => 'required|max:10',
             
         ]);
@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'username' => $request->username,
-            'Birthday' => $request->Birthday,
+            'BirthDate' => $request->BirthDate,
             'phone' => $request->phone,
             'package_id' => $request->package_id
         ]);

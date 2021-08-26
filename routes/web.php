@@ -74,5 +74,10 @@ Route::put('/shipments/{id}', [ShipmentController::class, 'update']);
 Route::get('/shipments/{id}/delete', [ShipmentController::class, 'destroy']);
 
 Route::get('/profile', [UserController::class, 'show'])->name('profile');
+Route::put('/profileE', [UserController::class, 'edit']);
+Route::get('/Editprofile', ['as' => 'Editprofile', function () {
+  $user = auth()->user();
+  return view('users.edit', ['user' =>$user]);
+}]);
 
 require __DIR__ . '/auth.php';
