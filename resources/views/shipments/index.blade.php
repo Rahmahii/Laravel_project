@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+  <h2>Shipments</h2>
+  <hr>
   <div class="row">
     <div class="col-md-9">
       <div class="row">

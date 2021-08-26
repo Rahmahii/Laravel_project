@@ -19,7 +19,7 @@
   </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
   </script>
-  
+
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -114,52 +114,52 @@
   <div id="app">
     <nav id="nn" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container">
+        @auth
+        <a class="navbar-brand " href="{{ url('/') }}">
+          {{auth()->user()->name}}
+        </a>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('logout') }}">
+              Logout
+            </a>
+          </li>
+          @if(Route::current()->getName() != 'products')
+          <li class="nav-item">
+            <a class="nav-link" href="{{('/products') }}">
+              Products
+            </a>
+          </li>
+          @endif
+        </ul>
+        @endauth
+        @guest
         <a class="navbar-brand " href="{{ url('/') }}">
           Rahmah
         </a>
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-
-          <!-- Right Side Of Navbar -->
-
-          <ul class="navbar-nav ml-auto">
-            @if(Route::current()->getName() != 'register' && Route::current()->getName() != 'login' && Route::current()->getName() != 'products')
-            <li class="nav-item">
-              <a class="nav-link" href="{{('/products') }}">
-                Products
-              </a>
-            </li>
-            @endif
-
-            @if(Route::current()->getName() != 'register' && Route::current()->getName() != 'login')
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('logout') }}">
-                Logout
-              </a>
-            </li>
-            @endif
-            <!-- Authentication Links -->
-            @if(Route::current()->getName() == 'register')
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">Login</a>
-            </li>
-            @endif @if(Route::current()->getName() == 'login')
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('register')}}">Register</a>
-            </li>
-
-            @endif
-
-          </ul>
-        </div>
+        <ul class="navbar-nav ml-auto">
+          @if(Route::current()->getName() == 'register')
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('login') }}">Login</a>
+          </li>
+          @endif 
+          @if(Route::current()->getName() == 'login')
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('register')}}">Register</a>
+          </li>
+          @endif
+        </ul>
+        @endguest
       </div>
-    </nav>
+  </div>
+  </nav>
 
-    <main class="py-4">
-      <div class="bg-light p-5 rounded">
-        @include('flash-message')
-        @yield('content')
-      </div>
-    </main>
+  <main class="py-4">
+    <div class="bg-light p-5 rounded">
+      @include('flash-message')
+      @yield('content')
+    </div>
+  </main>
   </div>
 </body>
 

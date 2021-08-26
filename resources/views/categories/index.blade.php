@@ -3,6 +3,8 @@
 @section('content')
 @include('categories.createModel')
 <div class="container">
+  <h2>Categories</h2>
+  <hr>
   <div class="row">
     <div class="col-md-9">
       <div class="row">

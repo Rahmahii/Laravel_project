@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ShipmentController;
-use App\Models\Client;
+use App\Http\Controllers\UserController;
 use App\Http\Requests\ClientRequest;
 
 /*
@@ -72,5 +72,7 @@ Route::post('/shipments', [ShipmentController::class, 'store']);
 Route::get('/shipmentsEdit/{id}', [ShipmentController::class, 'edit']);
 Route::put('/shipments/{id}', [ShipmentController::class, 'update']);
 Route::get('/shipments/{id}/delete', [ShipmentController::class, 'destroy']);
+
+Route::get('/profile', [UserController::class, 'show'])->name('profile');
 
 require __DIR__ . '/auth.php';
