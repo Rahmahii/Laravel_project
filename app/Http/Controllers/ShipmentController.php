@@ -86,7 +86,7 @@ class ShipmentController extends Controller
 
 
   public function edit($id)
-  {$products = auth()->user()->products;
+  {$products = auth()->user()->shipments->find($id)->products;
     $clients = auth()->user()->clients;
     $Carriers = Carrier::all();
     $shipment = auth()->user()->shipments()->find($id);

@@ -47,15 +47,18 @@
   </select>
   </div>
   <br>
+  @if (!$products->isEmpty())
   <h5>Products : </h5> 
   @foreach($products as $product)
   <div class="card-text">
     <h5>- <a href="{{ ('/products/'.$product->id)}}">{{$product->name}}</a>
-      <a href="{{ ('/shipments/'.$product->id.'/'.$shipment->id)}}">delete</a>
+      <a href="{{ ('/shipments/'.$product->id.'/'.$shipment->id)}}" class="btn btn-danger btn-sm">delete</a>
     </h5>
   </div>
   @endforeach 
-
+  @endif
+  <input value="add products for shipment" class="btn btn-primary btn-sm" onclick="DisplayEdit(3)" ondblclick="DisplayEdit(33)"> 
+  <br><br> 
   <div id="E3" class="card">
     <div class="card-header">
       Products
@@ -105,7 +108,7 @@
     </div>
   </div>
   <div>
-    <input class="btn btn-danger" type="submit" value="Save shipment">
+    <input class="btn btn-success" type="submit" value="update shipment">
   </div>
 </form>
 
