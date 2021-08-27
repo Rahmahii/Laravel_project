@@ -85,14 +85,17 @@ class ShipmentController extends Controller
 
 
 
-  public function edit(shipment $shipment)
-  {
-    //
+  public function edit($id)
+  {$products = auth()->user()->products;
+    $clients = auth()->user()->clients;
+    $Carriers = Carrier::all();
+    $shipment = auth()->user()->shipments()->find($id);
+    return view('shipments.Edit', ['shipment' => $shipment,'products' => $products, 'clients' => $clients, 'carriers' => $Carriers]);
   }
 
   public function update(Request $request, shipment $shipment)
   {
-    //
+    
   }
 
   public function destroy($id)
@@ -100,4 +103,9 @@ class ShipmentController extends Controller
     auth()->user()->shipments()->find($id)->delete();
     return redirect('/shipments')->with('success','shipment deleted successfully!');
   }
+ public function destroyPS($Pid,$Sid){
+   $product=DB::table('product_shipment')->where('product_id','=', $Pid)->where('shipment_id','=',$Sid)->get();
+   $product->each->delete();
+   return back()->with('success', 'Product deleted from shipment successfully!');
+ }
 }

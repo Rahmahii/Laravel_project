@@ -72,6 +72,7 @@ Route::post('/shipments', [ShipmentController::class, 'store']);
 Route::get('/shipmentsEdit/{id}', [ShipmentController::class, 'edit']);
 Route::put('/shipments/{id}', [ShipmentController::class, 'update']);
 Route::get('/shipments/{id}/delete', [ShipmentController::class, 'destroy']);
+Route::get('/shipments/{Pid}/{Sid}', [ShipmentController::class, 'destroyPS']);
 
 Route::get('/profile', [UserController::class, 'show'])->name('profile');
 Route::put('/profileE', [UserController::class, 'edit']);

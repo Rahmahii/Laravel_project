@@ -34,8 +34,10 @@
         <div class="card-text">
           <h5>- <a href="{{ ('/products/'.$product->id)}}">{{$product->name}}</a></h5>
         </div>
-        @endforeach
+        @endforeach 
       </div>
+      <a href="{{ ('/shipmentsEdit/'.$shipment->id)}}" class="btn btn-primary float-left mr-2">
+        Edit</a>
     </div>
   </div>
 </div>
