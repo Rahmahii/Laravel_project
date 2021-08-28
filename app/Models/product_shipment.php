@@ -15,4 +15,5 @@ class product_shipment extends Model
     'price',
     'quantity',
   ];
+
 }

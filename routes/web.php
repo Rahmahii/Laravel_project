@@ -70,7 +70,8 @@ Route::get('/shipments/{id}', [ShipmentController::class, 'show'])->name('showSh
 Route::get('/CreateShipments', [ShipmentController::class, 'create']);
 Route::post('/shipments', [ShipmentController::class, 'store']);
 Route::get('/shipmentsEdit/{id}', [ShipmentController::class, 'edit']);
-Route::put('/shipments/{id}', [ShipmentController::class, 'update']);
+Route::put('/shipments/{id}', [ShipmentController::class, 'updateShipment']);
+Route::put('/shipmentsPS/{id}', [ShipmentController::class, 'updatePS']);
 Route::get('/shipments/{id}/delete', [ShipmentController::class, 'destroy']);
 Route::get('/shipments/{Pid}/{Sid}', [ShipmentController::class, 'destroyPS']);
 

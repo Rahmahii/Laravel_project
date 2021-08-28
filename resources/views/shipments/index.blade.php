@@ -14,20 +14,20 @@
             <div class="card-header bg-dark text-white">
               for:
               @if(!is_null($shipment->client_id))
-               {{$shipment->client->fname}} {{$shipment->client->lname}}
+              {{$shipment->client->fname}} {{$shipment->client->lname}}
               @endif
             </div>
             <div class="card-body">
               <div class="card-title">
                 <h4>
                   price:
-                  {{$shipment->price}} 
+                  {{$shipment->price}}
                 </h4>
               </div>
               <hr>
               <a href="{{ ('/shipments/'.$shipment->id)}}" class="btn btn-primary">
                 show more </a>
-              <a href="{{ '/shipments/' . $shipment->id.'/delete/'}}" class="btn btn-danger ">
+              <a onclick="return confirm('Are you sure to delete this shipment?')" href="{{ '/shipments/' . $shipment->id.'/delete/'}}" class="btn btn-danger ">
                 Delete</a>
             </div>
           </div>

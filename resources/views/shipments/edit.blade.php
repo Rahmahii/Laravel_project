@@ -10,7 +10,7 @@
   <div class="card-text">
     <h5> client :<a href="{{ ('/clients/'.$shipment->client->id)}}">
         {{$shipment->client->fname}} {{$shipment->client->lname}} </a>
-        <input value="change" class="btn btn-primary btn-sm" onclick="DisplayEdit(1)" ondblclick="DisplayEdit(11)">
+      <input value="change" class="btn btn-primary btn-sm" onclick="DisplayEdit(1)" ondblclick="DisplayEdit(11)">
     </h5>
   </div>
   @else
@@ -29,36 +29,36 @@
   @if(!is_null($shipment->carrier_id))
   <div class="card-text">
     <h5>
-       carrier :{{$shipment->carrier->name}}
-       <input value="change" class="btn btn-primary btn-sm" onclick="DisplayEdit(2)" ondblclick="DisplayEdit(22)">  
-      </h5>
-    </div>
-    @else
-    <input value="add carrier" class="btn btn-primary btn-sm" onclick="DisplayEdit(2)" ondblclick="DisplayEdit(22)">  
-    @endif
-    <br>
+      carrier :{{$shipment->carrier->name}}
+      <input value="change" class="btn btn-primary btn-sm" onclick="DisplayEdit(2)" ondblclick="DisplayEdit(22)">
+    </h5>
+  </div>
+  @else
+  <input value="add carrier" class="btn btn-primary btn-sm" onclick="DisplayEdit(2)" ondblclick="DisplayEdit(22)">
+  @endif
+  <br>
   <div id="E2">
-  <label for="carrier_id">choose shipment's delivery :</label>
-  <select name="carrier_id" id="carrier_id" class="form-control">
-    <option value="">-- choose carrier --</option>
-    @foreach ($carriers as $carrier)
-    <option value="{{ $carrier->id }}">{{ $carrier->name }} ({{ $carrier->price }})</option>
-    @endforeach
-  </select>
+    <label for="carrier_id">choose shipment's delivery :</label>
+    <select name="carrier_id" id="carrier_id" class="form-control">
+      <option value="">-- choose carrier --</option>
+      @foreach ($carriers as $carrier)
+      <option value="{{ $carrier->id }}">{{ $carrier->name }} ({{ $carrier->price }})</option>
+      @endforeach
+    </select>
   </div>
   <br>
   @if (!$products->isEmpty())
-  <h5>Products : </h5> 
-  @foreach($products as $product)
+  <h5>Products : </h5>
+  @foreach($productsS as $product)
   <div class="card-text">
     <h5>- <a href="{{ ('/products/'.$product->id)}}">{{$product->name}}</a>
-      <a href="{{ ('/shipments/'.$product->id.'/'.$shipment->id)}}" class="btn btn-danger btn-sm">delete</a>
+      <a href="{{ ('/shipments/'.$product->id.'/'.$shipment->id)}}" class="btn btn-danger btn-sm" onclick="SaveInSession()">delete</a>
     </h5>
   </div>
-  @endforeach 
+  @endforeach
   @endif
-  <input value="add products for shipment" class="btn btn-primary btn-sm" onclick="DisplayEdit(3)" ondblclick="DisplayEdit(33)"> 
-  <br><br> 
+  <input value="add products for shipment" class="btn btn-primary btn-sm" onclick="DisplayEdit(3)" ondblclick="DisplayEdit(33)">
+  <br><br>
   <div id="E3" class="card">
     <div class="card-header">
       Products
@@ -140,7 +140,7 @@
   function DisplayEdit(x) {
     if (x == "1") {
       document.getElementById("E1").hidden = false;
-    }else if (x == "11") {
+    } else if (x == "11") {
       document.getElementById("E1").hidden = true;
     } else if (x == "2") {
       document.getElementById("E2").hidden = false;
@@ -151,6 +151,11 @@
     } else if (x == "33") {
       document.getElementById("E3").hidden = true;
     }
+  }
+  function SaveInSession() {
+    var e = document.getElementById("products_table");
+    sessionStorage.setItem("tableProduct", e);
+    document.getElementById("products_table").innerHTML = sessionStorage.getItem("tableProduct");
   }
 </script>
 

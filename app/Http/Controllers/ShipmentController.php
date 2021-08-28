@@ -14,7 +14,7 @@ use Redirect;
 
 class ShipmentController extends Controller
 {
-  
+
   public function index()
   {
     $shipments = auth()->user()->shipments;
@@ -23,8 +23,12 @@ class ShipmentController extends Controller
   public function show($id)
   {
     $shipment = auth()->user()->shipments()->find($id);
-    $products = $shipment->products;
-    return view('shipments.show', ['shipment' => $shipment,'products'=>$products]);
+    $PS = DB::table('product_shipment')->where('shipment_id', '=', $id)->get();
+      //$productsS = $shipment->products()->firstOrFail()->pivot->get;
+    $clients = auth()->user()->clients;
+    $products = auth()->user()->products;
+    $Carriers = Carrier::all();
+    return view('shipments.show', ['shipment' => $shipment, 'products' => $products, 'productsS' => $PS, 'clients' => $clients, 'carriers' => $Carriers]);
   }
   public function create()
   {
@@ -44,6 +48,8 @@ class ShipmentController extends Controller
     $products = $request->input('products', []);
     $quantities = $request->input('quantities', []);
     $prices = $request->input('prices', []);
+    
+    if(!empty($products[0])){
     $p = 0;
     $w = 0;
     for ($x = 0; $x < count($products); $x++) {
@@ -59,6 +65,8 @@ class ShipmentController extends Controller
         $shipment->products()->attach($products[$product], ['quantity' => $quantities[$product], 'price' => $prices[$product]]);
       }
     }
+  }
+    $shipment->save();
     return Redirect::route('shipments')->with('success', 'shipment added successfully!');
   }
   // public function storeShipmentProduct(Request $request, $id)
@@ -86,26 +94,64 @@ class ShipmentController extends Controller
 
 
   public function edit($id)
-  {$products = auth()->user()->shipments->find($id)->products;
+  {
+    $productsS = auth()->user()->shipments->find($id)->products;
     $clients = auth()->user()->clients;
+    $products = auth()->user()->products;
     $Carriers = Carrier::all();
     $shipment = auth()->user()->shipments()->find($id);
-    return view('shipments.Edit', ['shipment' => $shipment,'products' => $products, 'clients' => $clients, 'carriers' => $Carriers]);
+    return view('shipments.Edit', ['shipment' => $shipment, 'products' => $products, 'productsS' => $productsS, 'clients' => $clients, 'carriers' => $Carriers]);
   }
 
-  public function update(Request $request, shipment $shipment)
+  public function updateShipment(Request $request, $id)
   {
-    
+    $shipment =  auth()->user()->shipments->find($id);
+    $shipment->client_id = $request->client_id;
+    $shipment->carrier_id = $request->carrier_id;
+    $shipment->save();
+    return back()->with('success', 'shipment updated successfully!');
   }
-
+  public function updatePS(Request $request, $id)
+  {
+    $shipment =  auth()->user()->shipments->find($id);
+    $products = $request->input('products', []);
+    $quantities = $request->input('quantities', []);
+    $prices = $request->input('prices', []);
+    $p = $shipment->price;
+    $w = $shipment->weight;
+    for ($x = 0; $x < count($products); $x++) {
+      $p += $quantities[$x] * $prices[$x];
+      $product = auth()->user()->products()->find($products[$x]);
+      $w += $quantities[$x] * $product->weight;
+    }
+    $shipment->price = $p;
+    $shipment->weight = $w;
+    $shipment->save();
+    for ($product = 0; $product < count($products); $product++) {
+      if ($products[$product] != '') {
+        $shipment->products()->attach($products[$product], ['quantity' => $quantities[$product], 'price' => $prices[$product]]);
+      }
+    }
+    return back()->with('success', 'Products added to shipment successfully!');
+  }
   public function destroy($id)
   {
     auth()->user()->shipments()->find($id)->delete();
-    return redirect('/shipments')->with('success','shipment deleted successfully!');
+    return redirect('/shipments')->with('success', 'shipment deleted successfully!');
   }
- public function destroyPS($Pid,$Sid){
-   $product=DB::table('product_shipment')->where('product_id','=', $Pid)->where('shipment_id','=',$Sid)->get();
-   $product->each->delete();
-   return back()->with('success', 'Product deleted from shipment successfully!');
- }
+  public function destroyPS($Pid, $Sid)
+  {
+    $shipment = auth()->user()->shipments()->find($Sid);
+    //$PS = DB::table('product_shipment')->where('product_id', '=', $Pid)->where('shipment_id', '=', $Sid)->get();
+    $PS =  $shipment->products()->firstOrFail()->pivot->find($Pid);
+    //dd($PS);
+    $price=$PS->price;
+    $weight=$PS->weight;
+    if($PS->delete()){
+    $shipment->price = ($shipment->price) - $price;
+    $shipment->weight = ($shipment->weight) - $weight;
+    $shipment->save();
+  }
+    return back()->with('success', 'Product deleted from shipment successfully!');
+  }
 }
