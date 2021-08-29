@@ -2,7 +2,7 @@
 @section('content')
 @include('shipments.ShipmentModel',['shipment'=>$shipment,'clients'=>$clients,'carriers'=>$carriers])
 @include('shipments.ProductModel',['shipment'=>$shipment,'products'=>$products])
-
+@include('shipments.EditOneProduct',['products'=>$products])
 <div class="row mt-2">
   <div class="col-md-9 offset-md-2">
     <div class="card mb-3" style="min-width: 18rem;">
@@ -39,7 +39,10 @@
         @foreach($productsS as $product)
         <div class="card-text">
           <h5>- <a href="{{ ('/products/'.$product->product_id )}}">{{$product->quantity}} {{auth()->user()->products()->find($product->product_id)->name}} per piece for {{$product->price}} </a>
-            <a onclick="return confirm('Are you sure to delete the product from this shipment?')" href="{{ ('/shipments/'.$product->id.'/'.$shipment->id)}}" class="btn btn-danger btn-sm">delete</a>
+            <a onclick="return confirm('Are you sure to delete the product from this shipment?')" href="{{ ('/shipments/'.$product->id.'/'.$shipment->id)}}" class="btn btn-danger btn-sm">delete</a>   
+            <button  onclick="PSEditModel('{!!$product->price!!}','{!!$product->quantity!!}','{!!$product->id!!}','{!!$shipment->id!!}','{!!$product->product_id!!}');"  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelEditOne">
+              Edit
+            </button>    
           </h5>
         </div>
         @endforeach

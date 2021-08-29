@@ -6,6 +6,7 @@ use App\Models\shipment;
 use App\Models\Product;
 use App\Models\Carrier;
 use App\Models\User;
+use App\Models\product_shipment;
 use Illuminate\Http\Request;
 use App\Models\shipment_product;
 use Illuminate\Support\Facades\DB;
@@ -111,7 +112,7 @@ class ShipmentController extends Controller
     $shipment->save();
     return back()->with('success', 'shipment updated successfully!');
   }
-  public function updatePS(Request $request, $id)
+  public function add_PS(Request $request, $id)
   {
     $shipment =  auth()->user()->shipments->find($id);
     $products = $request->input('products', []);
@@ -133,6 +134,30 @@ class ShipmentController extends Controller
       }
     }
     return back()->with('success', 'Products added to shipment successfully!');
+  }
+
+  public function update_PS(Request $request, $Sid,$PSid){
+    $shipment =  auth()->user()->shipments->find($Sid);
+    $PS=product_shipment::find($PSid); 
+    $old_price = $PS->price*$PS->quantity;
+
+    $old_product=product::find($PS->product_id);
+    $old_weight=$old_product->weight*$PS->quantity;
+    
+    $PS->price=$request->price;
+    $PS->product_id=$request->product_id;
+    $PS->quantity=$request->quantity;
+
+    $new_price=$request->price*$request->quantity;
+
+    $new_product=product::find($request->product_id);
+    $new_weight=$new_product->weight*$request->quantity;
+
+    $shipment->price=$shipment->price-$old_price+$new_price;
+    $shipment->weight=$shipment->weight-$old_weight+$new_weight;
+    $shipment->save();
+    $PS->save();
+    return back()->with('success', 'Product in shipment updated successfully!');
   }
   public function destroy($id)
   {

@@ -71,7 +71,8 @@ Route::get('/CreateShipments', [ShipmentController::class, 'create']);
 Route::post('/shipments', [ShipmentController::class, 'store']);
 Route::get('/shipmentsEdit/{id}', [ShipmentController::class, 'edit']);
 Route::put('/shipments/{id}', [ShipmentController::class, 'updateShipment']);
-Route::put('/shipmentsPS/{id}', [ShipmentController::class, 'updatePS']);
+Route::put('/shipmentsPS/{id}', [ShipmentController::class, 'add_PS']);
+Route::put('/updateShipmentsPS/{Sid}/{PSid}', [ShipmentController::class, 'update_PS']);
 Route::get('/shipments/{id}/delete', [ShipmentController::class, 'destroy']);
 Route::get('/shipments/{Pid}/{Sid}', [ShipmentController::class, 'destroyPS']);
 

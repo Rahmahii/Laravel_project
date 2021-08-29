@@ -32,7 +32,6 @@
 <script>
   function EditModel(name, ID) {
     document.getElementById('modelform').action="/categories/"+ID;
-    document.getElementById("name").value = name;
-    
+    document.getElementById("name").value = name;    
   }
   </script>
