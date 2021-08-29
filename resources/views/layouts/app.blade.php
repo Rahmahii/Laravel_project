@@ -7,8 +7,9 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Rahmah') }}</title>
-
+  @auth
+  <title>{{auth()->user()->name}} - @yield('title')</title>
+@endauth
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
@@ -119,11 +120,20 @@
           {{auth()->user()->name}}
         </a>
         <ul class="navbar-nav ml-auto">
+          @if(Route::current()->getName() != 'shipments')
           <li class="nav-item">
-            <a class="nav-link" href="{{route('logout') }}">
-              Logout
+            <a class="nav-link" href="{{('/shipments') }}">
+              Shipments
             </a>
           </li>
+          @endif
+          @if(Route::current()->getName() != 'clients')
+          <li class="nav-item">
+            <a class="nav-link" href="{{('/clients') }}">
+              Clients
+            </a>
+          </li>
+          @endif
           @if(Route::current()->getName() != 'products')
           <li class="nav-item">
             <a class="nav-link" href="{{('/products') }}">
@@ -131,6 +141,11 @@
             </a>
           </li>
           @endif
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('logout') }}">
+              Logout
+            </a>
+          </li>
         </ul>
         @endauth
         @guest
@@ -157,6 +172,7 @@
   <main class="py-4">
     <div class="bg-light p-5 rounded">
       @include('flash-message')
+      @section('sidebar')
       @yield('content')
     </div>
   </main>

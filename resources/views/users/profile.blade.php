@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'profile')
 @section('content')
 
 <div class="row mt-2">
@@ -7,31 +8,31 @@
 
       <div class="card-body">
         <div class="card-title">
-          <h4>
+          <h4 class="font-weight-bold">
            {{$user->name}} informations: 
           </h4>
         </div>
         @if(!is_null($user->package_id))
         <div class="card-text">
-         <h5><big>package name: </big> {{$user->package->name}}</h5>
+         <h5><big class="font-weight-bold">package name: </big> {{$user->package->name}}</h5>
         </div>
         <div class="card-text">
-         <h5> <big>package price: </big> {{$user->package->price}} </h5>
+         <h5> <big class="font-weight-bold">package price: </big> {{$user->package->price}} </h5>
         </div>
         @endif
         <div class="card-text">
-        <h5>  <big>username: </big>{{$user->username}}</h5>
+        <h5>  <big class="font-weight-bold">username: </big>{{$user->username}}</h5>
         </div>
         <div class="card-text">
-         <h5> <big>phone: </big>{{$user->phone}} </h5>
-        </div>
-
-        <div class="card-text">
-         <h5> <big>email: </big>{{$user->email}} </h5>
+         <h5> <big class="font-weight-bold">phone: </big>{{$user->phone}} </h5>
         </div>
 
         <div class="card-text">
-         <h5> <big> Birthday:</big> {{$user->BirthDate}}</h5>
+         <h5> <big class="font-weight-bold">email: </big>{{$user->email}} </h5>
+        </div>
+
+        <div class="card-text">
+         <h5> <big class="font-weight-bold"> Birthday:</big> {{$user->BirthDate}}</h5>
         </div>
         
         <hr>

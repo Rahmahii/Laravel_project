@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'create shipment')
 @section('content')
 
 
@@ -34,6 +34,7 @@
             <th>Product</th>
             <th>Quantity</th>
             <th>Price</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -58,14 +59,15 @@
             <td>
               <input type="number" name="prices[]" class="form-control" />
             </td>
-
+            <td>
+              <input type="button" value="Delete" class=" btn btn-danger" onclick="deleteRow(this)">
+          </td>
           </tr>
           <tr id="product1"></tr>
         </tbody>
         <tfoot>
           <tr>
-            <button id="add_row" name="add_row" class="btn btn-default">+ Add Row</button>
-            <button id='delete_row' class=" btn btn-danger">- Delete Row</button>
+            <button id="add_row" name="add_row" class="btn btn-primary">+ Add Row</button>
           </tr>
         </tfoot>
       </table>
@@ -86,15 +88,12 @@
       $('#products_table').append('<tr id="product' + (row_number + 1) + '"></tr>');
       row_number++;
     });
-
-    $("#delete_row").click(function (e) {
-      e.preventDefault();
-      if (row_number > 1) {
-        $("#product" + (row_number - 1)).html('');
-        row_number--;
-      }
-    });
   });
+  
+  function deleteRow(r) {
+  var i = r.parentNode.parentNode.rowIndex;
+  document.getElementById("products_table").deleteRow(i);
+}
 </script>
 
 @endsection

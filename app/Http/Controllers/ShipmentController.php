@@ -8,7 +8,6 @@ use App\Models\Carrier;
 use App\Models\User;
 use App\Models\product_shipment;
 use Illuminate\Http\Request;
-use App\Models\shipment_product;
 use Illuminate\Support\Facades\DB;
 use Redirect;
 
@@ -25,7 +24,7 @@ class ShipmentController extends Controller
   {
     $shipment = auth()->user()->shipments()->find($id);
     $PS = DB::table('product_shipment')->where('shipment_id', '=', $id)->get();
-      //$productsS = $shipment->products()->firstOrFail()->pivot->get;
+      //$productsS = $shipment->products()->firstOrFail()->pivot->get();
     $clients = auth()->user()->clients;
     $products = auth()->user()->products;
     $Carriers = Carrier::all();
@@ -38,8 +37,6 @@ class ShipmentController extends Controller
     $Carriers = Carrier::all();
     return view('shipments.create', ['products' => $products, 'clients' => $clients, 'carriers' => $Carriers]);
   }
-
-
   public function store(Request $request)
   {
     $shipment = new shipment();
@@ -48,8 +45,7 @@ class ShipmentController extends Controller
     $shipment->carrier_id = $request->carrier_id;
     $products = $request->input('products', []);
     $quantities = $request->input('quantities', []);
-    $prices = $request->input('prices', []);
-    
+    $prices = $request->input('prices', []);  
     if(!empty($products[0])){
     $p = 0;
     $w = 0;
@@ -70,29 +66,6 @@ class ShipmentController extends Controller
     $shipment->save();
     return Redirect::route('shipments')->with('success', 'shipment added successfully!');
   }
-  // public function storeShipmentProduct(Request $request, $id)
-  // {
-  //   $products = $request->products;
-  //   $quantity=$request->quantity;
-  //   for ($x = 0; $x <count($products); $x++) { 
-  //     $shipment = new shipment_product();
-  //     $shipment->product_id = $products[$x];
-  //     $shipment->shipment_id = $id;
-  //     $shipment->quantity = $quantity[$x];
-  //     $shipment->save();
-  //   }
-
-  // }
-  // public function store(Request $request)
-  // {
-  //   $products = auth()->user()->products;
-  //   $shipment = new shipment();
-  //   $shipment->user_id = auth()->user()->id;
-  //   $shipment->save();
-  //   return view('shipments.create', ['products' => $products, 'shipment' => $shipment]);
-  // }
-
-
 
   public function edit($id)
   {
@@ -167,11 +140,10 @@ class ShipmentController extends Controller
   public function destroyPS($Pid, $Sid)
   {
     $shipment = auth()->user()->shipments()->find($Sid);
-    //$PS = DB::table('product_shipment')->where('product_id', '=', $Pid)->where('shipment_id', '=', $Sid)->get();
     $PS =  $shipment->products()->firstOrFail()->pivot->find($Pid);
-    //dd($PS);
     $price=$PS->price;
-    $weight=$PS->weight;
+    $product=product::find($PS->product_id);
+    $weight=$product->weight*$PS->quantity;
     if($PS->delete()){
     $shipment->price = ($shipment->price) - $price;
     $shipment->weight = ($shipment->weight) - $weight;
@@ -180,3 +152,26 @@ class ShipmentController extends Controller
     return back()->with('success', 'Product deleted from shipment successfully!');
   }
 }
+    // public function storeShipmentProduct(Request $request, $id)
+  // {
+  //   $products = $request->products;
+  //   $quantity=$request->quantity;
+  //   for ($x = 0; $x <count($products); $x++) { 
+  //     $shipment = new shipment_product();
+  //     $shipment->product_id = $products[$x];
+  //     $shipment->shipment_id = $id;
+  //     $shipment->quantity = $quantity[$x];
+  //     $shipment->save();
+  //   }
+
+  // }
+  // public function store(Request $request)
+  // {
+  //   $products = auth()->user()->products;
+  //   $shipment = new shipment();
+  //   $shipment->user_id = auth()->user()->id;
+  //   $shipment->save();
+  //   return view('shipments.create', ['products' => $products, 'shipment' => $shipment]);
+  // }
+
+

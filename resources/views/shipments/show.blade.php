@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'show and edit shipments')
 @section('content')
 @include('shipments.ShipmentModel',['shipment'=>$shipment,'clients'=>$clients,'carriers'=>$carriers])
 @include('shipments.ProductModel',['shipment'=>$shipment,'products'=>$products])

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'products')
 @section('content')
 <div class="container">
   <h2>Products</h2>
@@ -9,6 +9,7 @@
       <div class="row">
         <div class="row">
           <a href="{{ ('createProduct')}}" class="btn btn-success btn-lg">add product</a>
+          <hr style="height:2px;border-width:0;color:White;background-color:White">
           <a style="outline:10px; width: auto;" href="{{ '/categories'}}" class="btn btn-secondary btn-sm">  All my categories</a>
           <hr style="height:2px;border-width:0;color:White;background-color:White">
           <select id="select1" onchange="displayDivDemo()">

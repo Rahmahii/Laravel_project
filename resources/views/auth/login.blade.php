@@ -1,4 +1,6 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app') 
+<title>Login</title>
+@section('content')
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -40,8 +42,8 @@
                     {{ __('Forgot your password?') }}
                   </a> @endif
                   <input type="submit" class="ml-3 btn btn-primary" value="log in">
-
                 </div>
+                
           </form>
         </div>
       </div>

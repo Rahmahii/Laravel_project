@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Categories')
 @section('content')
 @include('categories.createModel')
 <div class="container">

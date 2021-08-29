@@ -18,8 +18,7 @@
     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
       @auth
       <a class="btn btn-warning" role="button" href="{{ url('/dashboard') }}">Dashboard</a> @else
-      <a class="btn btn-warning" role="button" href="{{ route( 'login') }} ">Log
-        in</a>
+      <a class="btn btn-warning" role="button" href="{{ route( 'login') }} ">Login</a>
     </div>
 
 
