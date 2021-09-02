@@ -35,6 +35,14 @@
         <div class="card-text">
           city:
           {{$client->city->name}}
+        </div>
+        <div class="card-text">
+there are {{count($shipments)}} shipments for this client:
+<br>
+          @foreach($shipments as $shipment)
+          <a href="{{ ('/shipments/'.$shipment->id)}}" class="btn btn-outline-info">
+           {{$shipment->id}} </a>
+          @endforeach
         </div> 
         <hr>
         <small class="text-muted">

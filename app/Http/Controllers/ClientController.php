@@ -6,6 +6,7 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\ClientRequest;
 use Redirect;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -18,7 +19,8 @@ class ClientController extends Controller
   public function show($id)
   {
     $client = auth()->user()->clients()->find($id);
-    return view('clients.show', ["client" => $client]);
+    $shipments = DB::table('shipments')->where('client_id', '=', $id)->get();
+    return view('clients.show', ["client" => $client,"shipments"=>$shipments]);
   }
 //   public function create()
 // { $client = new Client();  
